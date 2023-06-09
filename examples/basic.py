@@ -1,6 +1,6 @@
 import asyncio
 import sys
-
+from proxy import get_enumproxy
 from solverecaptchas.solver import Solver
 
 if len(sys.argv) == 4:
@@ -14,7 +14,7 @@ if proxy.lower() == "none":
 
 
 try:
-    client = Solver(pageurl, sitekey, proxy=proxy, headless=False)
+    client = Solver(pageurl, sitekey, proxy=get_enumproxy(), headless=True)
     result = asyncio.run(client.start())
     if result:
         print(result)
