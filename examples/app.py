@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+import time
 import asyncio
 import sys
-
+from proxy import get_enumproxy
 from aiohttp import web
 from urllib.parse import unquote
 
@@ -35,6 +35,7 @@ async def work(pageurl, sitekey, timeout, proxy, headless):
         return result
 
 async def get_solution(request):
+    start_time = time.time()
     params = request.rel_url.query
     pageurl = params.get("pageurl")
     sitekey = params.get("sitekey")
@@ -48,9 +49,11 @@ async def get_solution(request):
         result = None
         while not result:
             result = await work(
-                unquote(pageurl), sitekey, timeout=timeout, proxy=proxy, headless=False)
+                unquote(pageurl), sitekey, timeout=timeout, proxy=get_enumproxy(), headless=True)
+            end_time = time.time()
+            elapsed_time = end_time - start_time
             if result:
-                response = {"solution": result}
+                response = {"solution": result, "Elapsed Time": elapsed_time}
             else:
                 response = {"error": "worker timed-out"}
     return web.json_response(response)
