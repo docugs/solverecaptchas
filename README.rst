@@ -50,7 +50,7 @@ I've trained a model that detects each of the following classes which support 9x
 16. traffic sign
 17. truck
 
-This model can be downloaded from https://mikey.id/yolov3.weights. I've provided the other necessary files under **model/**.
+This model can be downloaded from https://www.dropbox.com/s/bsb4qew5h0mvm1l/model.zip?dl=1 I've provided the other necessary files under **model/**.
 
 Compatibility
 -------------
